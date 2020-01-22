@@ -1,22 +1,8 @@
 pipeline {
-  agent {
-    kubernetes {
-      yaml """
-kind: Pod
-metadata:
-  name: jenkins-slave
-spec:
-  containers:
-  - name: kaniko
-    image: gcr.io/kaniko-project/executor:debug
-    imagePullPolicy: Always
-    command:
-    - /busybox/cat
-    tty: true
-  restartPolicy: Never
-"""
-    }
+  options {
+    checkoutToSubdirectory('foo')
   }
+  agent any
   stages {
     stage('Build') {
       steps {
