@@ -20,7 +20,7 @@ spec:
   stages {
     stage('Build') {
       steps {
-          echo "sleep 300"
+          sh "sleep 30s"
       }
     }
   }
