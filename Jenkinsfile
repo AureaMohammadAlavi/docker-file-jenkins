@@ -1,7 +1,7 @@
 pipeline {
   options {
     checkoutToSubdirectory('foo')
-    buildDiscarder(logRotator(numToKeepStr: '2'))
+    disableConcurrentBuilds()
   }
   agent any
   stages {
