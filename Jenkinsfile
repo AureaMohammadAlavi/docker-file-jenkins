@@ -1,12 +1,13 @@
 pipeline {
   options {
     checkoutToSubdirectory('foo')
+    buildDiscarder(logRotator(numToKeepStr: '2'))
   }
   agent any
   stages {
     stage('Build') {
       steps {
-          sh "sleep 30s"
+          sh "echo hello"
       }
     }
   }
