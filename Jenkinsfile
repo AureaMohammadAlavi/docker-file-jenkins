@@ -2,31 +2,31 @@ pipeline {
   agent {
     kubernetes {
       yaml """
-      kind: Pod
-      metadata:
-      name: jenkins-slave
-      spec:
-      containers:
-      - name: kaniko
-      image: gcr.io/kaniko-project/executor:debug
-      imagePullPolicy: Always
-      command:
-      - /busybox/cat
-      tty: true
-      volumeMounts:
+kind: Pod
+metadata:
+  name: jenkins-slave
+spec:
+  containers:
+  - name: kaniko
+    image: gcr.io/kaniko-project/executor:debug
+    imagePullPolicy: Always
+    command:
+    - /busybox/cat
+    tty: true
+    volumeMounts:
       - name: aws-secret
-      mountPath: /root/.aws/
+        mountPath: /root/.aws/
       - name: docker-registry-config
-      mountPath: /kaniko/.docker
-      restartPolicy: Never
-      volumes:
-      - name: aws-secret
+        mountPath: /kaniko/.docker
+  restartPolicy: Never
+  volumes:
+    - name: aws-secret
       secret:
-      secretName: aws-secret
-      - name: docker-registry-config
+        secretName: aws-secret
+    - name: docker-registry-config
       configMap:
-      name: docker-registry-config
-      """
+        name: docker-registry-config
+"""
     }
   }
   stages {
