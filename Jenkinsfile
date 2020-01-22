@@ -8,6 +8,7 @@ pipeline {
     stage('Build') {
       steps {
           sh "date"
+          sh "sleep 10"
       }
     }
   }
